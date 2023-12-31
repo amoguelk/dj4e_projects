@@ -2,10 +2,8 @@
 <html>
 
 <head>
-    <!-- Edit dj4e-samples/settings.py and add APP_NAME = 'DJ4E Samples' or similar -->
-    <title>{% block title %}{{ settings.APP_NAME }}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 
-    <!-- Replace this value (42-42) with the one provided by the autograder -->
     <meta name="dj4e" content="410e7a8274d8cdf0f354bfac7dd2c648">
 
     <meta name="dj4e-code" content="42170369773866">
@@ -42,6 +40,9 @@
         {% endblock %}
         {% block content %}
         {% endblock %}
+        {% if user.is_authenticated %}
+            <p><a href="{% url 'logout' %}">Log Out</a></p>
+        {% endif %}
     </div>
     {% block footer %} {% endblock %}
 </body>

@@ -25,22 +25,24 @@ SECRET_KEY = "django-insecure-5-cmh1m7&opk@m-vib&bvzl_7j&6pfdym^vu$%x2b0fznvov3r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '*' ]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "polls.apps.PollsConfig",
-    "home.apps.HomeConfig",
     "autos.apps.AutosConfig",
+    "cats.apps.CatsConfig",
     "hello.apps.HelloConfig",
+    "home.apps.HomeConfig",
+    "polls.apps.PollsConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_extensions",  # Extensions - see requirements.txt
 ]
 
 MIDDLEWARE = [

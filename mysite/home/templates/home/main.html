@@ -1,15 +1,16 @@
-<html>
-    <head>
-        <title>Home Page</title>
-    </head>
-    <body>
-        <h1>My Site Home Page</h1>
-        <ul>
-            <li><p><a href="/polls">A Polls Application</a></p></li>
-            <li><p><a href="/hello">Test the session</a></p></li>
-            <li>
-                <p><a href="/autos">Autos CRUD</a></p>
-            </li>
-        </ul>
-    </body>
-</html>
+{% extends "base_bootstrap.html" %}
+
+{% block title %}Home Page{% endblock title %}
+{% block content %}
+<h1>My Site Home Page</h1>
+{% if user.is_authenticated %}
+<h4>Hi, {{ user.username }}</h4>
+{% endif %}
+<ul>
+    <li><p><a href="/polls">A Polls Application</a></p></li>
+    <li><p><a href="/hello">Test the session</a></p></li>
+    <li>
+        <p><a href="/autos">Autos CRUD</a></p>
+    </li>
+</ul>
+{% endblock content %}
