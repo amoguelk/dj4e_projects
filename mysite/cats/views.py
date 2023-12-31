@@ -14,7 +14,7 @@ class CatList(LoginRequiredMixin, View):
         cat_list = Cat.objects.all()
 
         context = {"breed_count": breed_count, "cat_list": cat_list}
-        return render(request, "cats/cats_list.html", context)
+        return render(request, "cats/cat_list.html", context)
 
 
 class BreedView(LoginRequiredMixin, View):
