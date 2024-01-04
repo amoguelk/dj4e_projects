@@ -82,6 +82,7 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# For local
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -89,6 +90,19 @@ DATABASES = {
     }
 }
 
+# For PythonAnywhere
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'drchuck$ads',
+#         'USER': 'drchuck',
+#         'PASSWORD': 'phone_8675309',
+#         'HOST': 'drchuck.mysql.pythonanywhere-services.com',
+#          'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+#         },
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
