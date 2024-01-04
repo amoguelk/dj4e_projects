@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{{settings.APP_NAME}}{% endblock %}</title>
 
     <meta name="dj4e" content="410e7a8274d8cdf0f354bfac7dd2c648">
 
@@ -40,9 +40,6 @@
         {% endblock %}
         {% block content %}
         {% endblock %}
-        {% if user.is_authenticated %}
-            <p><a href="{% url 'logout' %}">Log Out</a></p>
-        {% endif %}
     </div>
     {% block footer %} {% endblock %}
 </body>

@@ -2,7 +2,7 @@
 
 {% block title %}Home Page{% endblock title %}
 {% block content %}
-<h1>My Site Home Page</h1>
+<h1>Welcome to {{settings.APP_NAME}}</h1>
 {% if user.is_authenticated %}
 <h4>Hi, {{ user.username }}</h4>
 {% endif %}
