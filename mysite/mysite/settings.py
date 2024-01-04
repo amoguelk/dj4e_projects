@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # Home application
     "home.apps.HomeConfig",
     # Other apps
+    "ads.apps.AdsConfig",
     "autos.apps.AutosConfig",
     "cats.apps.CatsConfig",
     "hello.apps.HelloConfig",
@@ -94,10 +95,10 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'drchuck$ads',
-#         'USER': 'drchuck',
-#         'PASSWORD': 'phone_8675309',
-#         'HOST': 'drchuck.mysql.pythonanywhere-services.com',
+#         'NAME': 'amog98$ads',
+#         'USER': 'amog98',
+#         'PASSWORD': 'MWWU9w@mkZxk#^'
+#         'HOST': 'amog98.mysql.pythonanywhere-services.com',
 #          'OPTIONS': {
 #             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
 #         },
