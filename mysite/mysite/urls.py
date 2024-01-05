@@ -60,6 +60,7 @@ urlpatterns += [
             "path": "favicon-32x32.png",
             "document_root": os.path.join(BASE_DIR, "home/static"),
         },
+        name="logo",
     ),
 ]
 
