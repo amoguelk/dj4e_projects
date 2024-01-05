@@ -53,6 +53,14 @@ urlpatterns += [
             "document_root": os.path.join(BASE_DIR, "home/static"),
         },
     ),
+    path(
+        "favicon.png",
+        serve,
+        {
+            "path": "favicon-32x32.png",
+            "document_root": os.path.join(BASE_DIR, "home/static"),
+        },
+    ),
 ]
 
 # Switch to social login if it is configured - Keep for later
