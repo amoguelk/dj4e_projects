@@ -1,4 +1,7 @@
-{% extends "base_menu.html" %} {% load humanize %} {% block head %}
+{% extends "base_menu.html" %}
+{% load humanize %} 
+{% load crispy_forms_tags %}
+{% block head %}
 <style>
   .overlay {
     position: fixed;
@@ -13,8 +16,8 @@
 </style>
 {% endblock head %}
 {% block content %} 
+    <!--Picture overlay that appears when the user clicks on the picture-->
     {% if ad.content_type %}
-        <!--Picture overlay that appears when the user clicks on the picture-->
         <div
         id="overlay"
         class="overlay"
@@ -30,11 +33,37 @@
     <span style="float: right">
         ({{ ad.updated_at|naturaltime }})
         {% if ad.owner == user %}
-            <a href="{% url 'ads:ad_update' ad.id %}"><i class="fa fa-pencil"></i></a>
-            <a href="{% url 'ads:ad_delete' ad.id %}"><i class="fa fa-trash"></i></a>
+            <h4 style="display: inline;"><a href="{% url 'ads:ad_update' ad.id %}"><i class="fa fa-pencil"></i></a></h4>
+            <h4 style="display: inline;"><a href="{% url 'ads:ad_delete' ad.id %}"><i class="fa fa-trash"></i></a></h4>
         {% endif %}
     </span>
     <h1>{{ ad.title }}</h1>
+    <!--Content-->
+    <span style="float: left">
+        <h3>Price: ${{ ad.price|intcomma}}</h3>
+        <p>{{ ad.text }}</p>
+        <p><a href="{% url 'ads:all' %}">All ads</a></p>
+        <!--Comments-->
+        {% if user.is_authenticated %}
+        <p>
+                <form method="post" action="{% url 'ads:ad_comment_create' ad.id %}">
+                    {% csrf_token %}
+                    {{ comment_form|crispy }}
+                    <input type="submit" value="Submit">
+                    <input type="submit" value="All Ads" onclick="window.location.href='{% url 'ads:all' %}';return false;">
+                </form>
+            </p>
+        {% endif %}
+        {% for comment in comments %}
+        <p>
+            {{ comment.text }} ({{ comment.updated_at|naturaltime }})
+            {% if user == comment.owner %}
+            <a href="{% url 'ads:ad_comment_delete' comment.id %}"><i class="fa fa-trash"></i></a>
+            {% endif %}
+        </p>
+        {% endfor %}
+    </span>
+    <!--Picture on the side of the content-->
     {% if ad.content_type %}
         <img
         style="float: right; max-width: 50%"
@@ -42,7 +71,4 @@
         onclick="document.getElementById('overlay').style.display = 'block';"
         />
     {% endif %}
-    <h3>Price: ${{ ad.price|intcomma}}</h3>
-    <p>{{ ad.text }}</p>
-    <p><a href="{% url 'ads:all' %}">All ads</a></p>
 {% endblock %}
