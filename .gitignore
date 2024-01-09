@@ -7,3 +7,6 @@ github_settings.py
 
 # Editor settings
 .vscode
+
+# There's no need to upload the batch project rn
+batch/*
