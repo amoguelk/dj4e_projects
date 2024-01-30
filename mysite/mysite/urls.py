@@ -54,10 +54,10 @@ urlpatterns += [
         },
     ),
     path(
-        "favicon.png",
+        "favicon.svg",
         serve,
         {
-            "path": "favicon-32x32.png",
+            "path": "favicon.svg",
             "document_root": os.path.join(BASE_DIR, "home/static"),
         },
         name="logo",
