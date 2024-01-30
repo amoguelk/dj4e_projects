@@ -60,6 +60,15 @@ urlpatterns += [
             "path": "favicon.svg",
             "document_root": os.path.join(BASE_DIR, "home/static"),
         },
+        name="favicon",
+    ),
+    path(
+        "logo.svg",
+        serve,
+        {
+            "path": "logo.svg",
+            "document_root": os.path.join(BASE_DIR, "home/static"),
+        },
         name="logo",
     ),
 ]

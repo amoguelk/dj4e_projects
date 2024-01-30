@@ -1,18 +1,13 @@
 {% extends 'base_bootstrap.html' %}
 {% load app_tags %}
+{% block title %}AdSpace{% endblock title %}
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="border-radius:10px !important">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'ads:all' %}" style="display: flex; align-items: center;">
-      <img src="{% url "logo" %}" alt="Logo" width="52" class="d-inline-block align-text-top"/>
+    <a class="navbar-brand" href="{% url 'home:main' %}" style="display: flex; align-items: center;">
       {{ settings.APP_NAME }}
     </a>
-    <ul class="navbar-nav">
-      {% url 'ads:all' as x %}
-      <li {% if request.get_full_path == x %}class="active"{% endif %}>
-          <a class="nav-link" href="{% url 'ads:all' %}" role="button">AdSpace</a>
-      </li>
-    </ul>
+    <a href="{% url 'ads:all' %}" role="button"><img src="{% url "logo" %}" alt="AdSpace Logo" width="85"/></a>
     <ul class="navbar-nav" style="align-items: center;">
       {% if user.is_authenticated %}
         <li>
