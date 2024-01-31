@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "social_django",
+    "django.contrib.admindocs",
+    "taggit",
     # Home application
     "home.apps.HomeConfig",
     # Other apps

@@ -5,10 +5,10 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.db.utils import IntegrityError
+from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Ad, Comment, Fav
 from .owner import (
-    OwnerListView,
     OwnerDetailView,
     OwnerDeleteView,
 )
@@ -18,17 +18,30 @@ from .forms import CommentForm, CreateForm
 ############
 # Ad Views #
 ############
-class AdListView(OwnerListView):
-    model = Ad
+class AdListView(View):
+    """Shows all ads in a list"""
+
     template_name = "ads/ad_list.html"
 
     def get(self, request):
-        ad_list = Ad.objects.all()
+        search_str = request.GET.get("search", False)
+        # If there is a search
+        if search_str:
+            query = Q(title__icontains=search_str)
+            query.add(Q(text__icontains=search_str), Q.OR)
+            query.add(Q(tags__name__in=[search_str]), Q.OR)
+            # select_related preloads the one to many relationship to avoid consulting the database twice (https://docs.djangoproject.com/en/4.2/ref/models/querysets/#django.db.models.query.QuerySet.select_related)
+            ad_list = Ad.objects.filter(query).select_related().distinct()
+        else:
+            ad_list = Ad.objects.all()
+
+        # Determine favorites
         favorites = list()
         if request.user.is_authenticated:
             rows = request.user.favorite_ads.values("id")
             favorites = [row["id"] for row in rows]
-        ctx = {"ad_list": ad_list, "favorites": favorites}
+
+        ctx = {"ad_list": ad_list, "favorites": favorites, "search": search_str}
         return render(request, self.template_name, ctx)
 
 
@@ -90,6 +103,7 @@ class AdCreateView(LoginRequiredMixin, View):
         ad = form.save(commit=False)
         ad.owner = self.request.user
         ad.save()
+        form.save_m2m()  # To save tags
         return redirect(self.success_url)
 
 
